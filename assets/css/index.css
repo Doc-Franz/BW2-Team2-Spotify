@@ -9,3 +9,7 @@
 .play-btn:hover {
   border: 0px !important;
 }
+
+#hearth-btn:hover {
+  fill: white;
+}
