@@ -1,0 +1,11 @@
+/* BUTTON  */
+
+.save-btn:hover {
+  color: black !important;
+  background-color: #1ed760;
+  border: 0px !important;
+}
+
+.play-btn:hover {
+  border: 0px !important;
+}
