@@ -8,19 +8,6 @@
   fill: white;
 }
 
-/* Scrollbar Style */
-*::-webkit-scrollbar {
-  width: 13px;
-}
-
-*::-webkit-scrollbar-thumb {
-  background-color: #333;
-}
-
-*::-webkit-scrollbar-track {
-  background-color: #606060;
-}
-
 /* Footer  */
 
 /* @media screen and (max-width: 879px) {
