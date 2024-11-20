@@ -1,17 +1,27 @@
-// Gestione view Sidebars Amici e Sezione Annunci
-const linkHideFriends = document.querySelector(".link-hideFriends");
-const linkShowFriends = document.querySelector(".link-showFriends");
-const middleCol = document.querySelector(".middle-col");
+const urlParams = new URLSearchParams(window.location.search);
+const artistId = urlParams.get("appId");
 
-linkHideFriends.onclick = () => {
-  middleCol.classList.remove("col-7");
-  middleCol.classList.add("col-9");
-};
+const URL = "https://striveschool-api.herokuapp.com/api/deezer/";
+const albumUrl = "album/";
+const artistUrl = "artist/";
 
-linkShowFriends.onclick = () => {
-  middleCol.classList.remove("col-9");
-  middleCol.classList.add("col-7");
-  const hideFriends = document.getElementById("hideFriends");
-  hideFriends.classList.remove("hide");
-  hideFriends.classList.add("show");
-};
+window.addEventListener("DOMContentLoaded", () => {
+  if (artistId) {
+    fetch(`${URL + artistUrl}${artistId}`, {
+      headers: {
+        "x-rapidapi-key": tokenAPI,
+        "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com"
+      }
+    })
+      .then((resp) => resp.json())
+      .then((artist) => {
+        console.log(artist);
+        document.getElementById("artistTitle").innerText = artist.name;
+        document.getElementById("artistFans").innerText = `${artist.nb_fan} ascoltatori mensili`;
+        document.querySelector(".image-bg").style.backgroundImage = `url(${artist.picture_big})`;
+      })
+      .catch((err) => {
+        console.error("Errore nel recupero del prodotto:", err);
+      });
+  }
+});

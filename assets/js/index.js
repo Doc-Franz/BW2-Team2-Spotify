@@ -5,7 +5,7 @@ const URL = "https://striveschool-api.herokuapp.com/api/deezer/";
 const albumUrl = "album/";
 const artistUrl = "artist/";
 const searchUrl = "search/";
-let updateHero = true; //Con questa condizione verifico se chiamare ChangeHeroAlbum() oppure createPlaylists()
+let updateHero = true; //Con questa condizione verifico se chiamare changeHero() oppure createPlaylists()
 
 // const prova = "i pinguini tattici nucleari";
 
@@ -33,14 +33,17 @@ let updateHero = true; //Con questa condizione verifico se chiamare ChangeHeroAl
 //   getMusic();
 // });
 
-const changeHeroAlbum = (albumObj) => {
+const changeHero = (albumObj) => {
   // HERO
   const imgHero = document.querySelector("#hideAds img");
   imgHero.src = albumObj.cover;
+  const linkHeroImg = document.querySelector("#hideAds a");
+  linkHeroImg.href = `./album-page.html?appId=${albumObj.id}`;
   const heroTitle = document.querySelector(".heroTitle");
   heroTitle.innerText = albumObj.title;
   const heroArtist = document.querySelector(".heroArtist");
   heroArtist.innerText = albumObj.artist.name;
+  heroArtist.href = `./artist-page.html?appId=${albumObj.artist.id}`;
   const heroTxt = document.querySelector(".heroTxt");
   heroTxt.innerText = `Ascolta il nuovo singolo di ${albumObj.artist.name}`;
 
@@ -61,7 +64,23 @@ const changeHeroAlbum = (albumObj) => {
   // durationMusicTotal.innerText = `${albumObj.duration / 60}:${albumObj.duration % 60}`;
 };
 
-const arr = ["594581752", "119606", "595243", "7090505", "103248"]; //Array con id delle canzoni
+const arr = [
+  "594581752",
+  "119606",
+  "595243",
+  "7090505",
+  "103248",
+  "670261311",
+  "185484062",
+  "129682552",
+  "129682632",
+  "12047958",
+  "12047952",
+  "12047956",
+  "507149371",
+  "12047934",
+  "1603030"
+]; //Array con id delle canzoni
 
 const randomMusicID = () => {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -88,14 +107,16 @@ const getMusic = (endpoint, urlID) => {
       }
     })
     .then((musicObj) => {
+      console.log(musicObj);
       if (updateHero) {
-        changeHeroAlbum(musicObj);
+        changeHero(musicObj);
       } else {
         const ul = document.querySelector(".random-playlist");
         const li = document.createElement("li");
         li.className = "nav-item";
         const a = document.createElement("a");
         a.className = "text-decoration-none text-secondary";
+        a.href = `./album-page.html?appId=${musicObj.id}`;
         a.innerText = musicObj.title;
         li.appendChild(a);
         ul.appendChild(li);
