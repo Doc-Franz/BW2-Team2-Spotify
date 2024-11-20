@@ -1,0 +1,11 @@
+@media screen and (min-width: 1024px) {
+    #mainImg {
+        margin-left: 40px; 
+    }
+}
+
+@media screen and (max-width:1200px){
+    #album {
+        display: none;
+    }
+}
