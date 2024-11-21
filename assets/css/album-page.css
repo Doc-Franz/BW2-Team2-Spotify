@@ -1,11 +1,98 @@
+/*Aggiunge margine sinistro*/
 @media screen and (min-width: 1024px) {
     #mainImg {
         margin-left: 40px; 
     }
 }
-
+/*Rimuove testo "Album"*/
 @media screen and (max-width:1200px){
     #album {
         display: none;
+    }
+}
+/*Rimuove sezione sinistra*/
+@media screen and (max-width:990px){
+    #firstSection{
+        display: none;
+    }
+}
+/*Rimuove sezione play*/
+@media screen and (max-width:768px){
+    #playSection {
+        display: none;
+    }
+}
+
+/*Aggiunta sezione play mobile*/
+@media screen and (min-width:767px){
+    .playSectionMobile {
+        display:none;
+    }
+}
+@media screen and (max-width:767px){
+    .playSectionMobile{
+        display: block;
+
+    }
+}
+
+/*Rimuove footer*/
+@media screen and (max-width:990px){
+    footer {
+        display: none;
+    }
+}
+/*Aggiunta footer versione mobile*/
+@media screen and (min-width:990px) {
+    .endPage {
+        display: none;
+    }
+}
+@media screen and (max-width:989px) {
+ .endPage {
+    display: block;
+ }
+}
+/*Rimuove nome dell'artista*/
+@media screen and (max-width:768px){
+    #artistName {
+        display: none;
+    }
+}
+/*Rimuove sezione amici*/
+@media screen and (max-width:1200px){
+    #hideFriends{
+        display: none;
+    }
+}
+/*Aggiunta nome artista versione mobile*/
+@media screen and (min-width:768px){
+    #artistNameMobile {
+        display: none;
+    }
+}
+@media screen and (max-width:767px){
+    #artistNameMobile{
+        display: block;
+
+    }
+}
+  .icon-link:hover {
+    color: white;
+  }
+  @media screen and (max-width:786px){
+    .userDropdown {
+        display: none;
+    }
+}
+/*Rimuove dropdown Utente*/
+@media screen and (max-width:786px){
+    .userDropdown {
+        display: none;
+    }
+}
+@media screen and (min-width:787px){
+    .userDropdown {
+        display:flex;
     }
 }

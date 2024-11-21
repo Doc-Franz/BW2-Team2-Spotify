@@ -5,13 +5,13 @@ const linkShowAds = document.querySelector(".link-showAds");
 const middleCol = document.querySelector(".middle-col");
 
 linkHideFriends.onclick = () => {
-  middleCol.classList.remove("col-7");
-  middleCol.classList.add("col-9");
+  middleCol.classList.remove("col-xl-7");
+  middleCol.classList.add("col-xl-9");
 };
 
 linkShowFriends.onclick = () => {
-  middleCol.classList.remove("col-9");
-  middleCol.classList.add("col-7");
+  middleCol.classList.remove("col-xl-9");
+  middleCol.classList.add("col-xl-7");
   const hideFriends = document.getElementById("hideFriends");
   hideFriends.classList.remove("hide");
   hideFriends.classList.add("show");
