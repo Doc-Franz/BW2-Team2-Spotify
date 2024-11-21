@@ -53,13 +53,10 @@
     display: block;
  }
 }
-/*Rimuove nome dell'artista, dropdown Utente*/
+/*Rimuove nome dell'artista*/
 @media screen and (max-width:768px){
     #artistName {
         display: none;
-    }
-    #userDropdown {
-        display:none;
     }
 }
 /*Rimuove sezione amici*/
@@ -80,15 +77,22 @@
 
     }
 }
-@media (max-width: 768px) {
-    #userDropdown {
-      display: none;
-    }
-    #userDropdownColor {
-        background-color: transparent;
-    }
-  }
   .icon-link:hover {
     color: white;
   }
- 
+  @media screen and (max-width:786px){
+    .userDropdown {
+        display: none;
+    }
+}
+/*Rimuove dropdown Utente*/
+@media screen and (max-width:786px){
+    .userDropdown {
+        display: none;
+    }
+}
+@media screen and (min-width:787px){
+    .userDropdown {
+        display:flex;
+    }
+}
