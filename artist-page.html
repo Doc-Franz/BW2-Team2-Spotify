@@ -14,7 +14,7 @@
 <body>
   <div class="container-fluid text-white">
     <div class="row">
-      <div class="col-3 bg-black">
+      <div id="firstSection" class="col-3 bg-black">
         <div class="container mt-3">
           <div class="row d-flex flex-column gap-3">
             <div class="col d-flex flex-column gap-2">
@@ -170,7 +170,7 @@
           </div>
         </div>
       </div>
-      <div class="middle-col col-7 px-0"
+      <div class="middle-col col-xs-12 col-sm-12 col-md-12 col-lg-9 col-xl-7 p-0"
         style="background-color: black; padding-bottom: 150px; height: 100vh; overflow-y: auto">
         <div class="container px-4 arrow pt-3" style="
               background-image: url(./assets/imgs/main/yellowcard-logo.jpg);
@@ -202,7 +202,7 @@
                 </svg>
               </button>
             </div>
-            <div class="col d-flex justify-content-end">
+            <div class="col justify-content-end userDropdown">
               <div class="nav-item dropdown rounded-pill ps-0 pe-2 d-flex"
                 style="background-color: black; font-size: 14px" data-bs-theme="dark">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -673,6 +673,59 @@
               </div> -->
           </div>
         </footer>
+
+
+        <!--footer che compare dispositivi tablet e mobile-->
+        <div class="endPage fixed-bottom bg-dark text-secondary">
+          <div class="container">
+            <div class="row d-flex justify-content-between">
+              <div class="col-auto">
+                <div class="row d-flex flex-column align-items-center ms-3">
+                <div class="col-12">
+                <svg data-encore-id="icon"
+                  role="img" width="20px" height="20px" aria-hidden="true" viewBox="0 0 24 24"
+                  class="Svg-sc-ytk21e-0 bneLcE me-2 icon-link" fill="currentColor">
+                  <path
+                    d="M13.5 1.515a3 3 0 0 0-3 0L3 5.845a2 2 0 0 0-1 1.732V21a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-6h4v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V7.577a2 2 0 0 0-1-1.732l-7.5-4.33z">
+                  </path>
+                </svg></div class="col-12">
+                <a class="nav-link icon-link" aria-current="page" href="./index.html">Home</a>
+              </div>
+              </div>
+              <div class="col-auto">
+                <div class="row d-flex flex-column align-items-center">
+                  <div class="col-12">
+                <svg data-encore-id="icon"
+                  role="img" width="20px" height="20px" aria-hidden="true" data-testid="search-icon"
+                  class="Svg-sc-ytk21e-0 bHdpig me-2 M9l40ptEBXPm03dU3X1k icon-link" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M10.533 1.27893C5.35215 1.27893 1.12598 5.41887 1.12598 10.5579C1.12598 15.697 5.35215 19.8369 10.533 19.8369C12.767 19.8369 14.8235 19.0671 16.4402 17.7794L20.7929 22.132C21.1834 22.5226 21.8166 22.5226 22.2071 22.132C22.5976 21.7415 22.5976 21.1083 22.2071 20.7178L17.8634 16.3741C19.1616 14.7849 19.94 12.7634 19.94 10.5579C19.94 5.41887 15.7138 1.27893 10.533 1.27893ZM3.12598 10.5579C3.12598 6.55226 6.42768 3.27893 10.533 3.27893C14.6383 3.27893 17.94 6.55226 17.94 10.5579C17.94 14.5636 14.6383 17.8369 10.533 17.8369C6.42768 17.8369 3.12598 14.5636 3.12598 10.5579Z">
+                  </path>
+                </svg></div>
+                <div class="col-12">
+                <a class="nav-link icon-link" aria-current="page" href="./search-page.html">Cerca</a>
+              </div>
+              </div>
+              </div>
+              <div class="col-auto d-flex flex-column align-items-center">
+                <div class="row">
+                  <div class="col-12">
+             <svg data-encore-id="icon" role="img"
+                width="20px" height="20px" aria-hidden="true" viewBox="0 0 24 24"
+                class="Svg-sc-ytk21e-0 bneLcE me-2 icon-link" fill="currentColor">
+                <path
+                  d="M3 22a1 1 0 0 1-1-1V3a1 1 0 0 1 2 0v18a1 1 0 0 1-1 1zM15.5 2.134A1 1 0 0 0 14 3v18a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V6.464a1 1 0 0 0-.5-.866l-6-3.464zM9 2a1 1 0 0 0-1 1v18a1 1 0 1 0 2 0V3a1 1 0 0 0-1-1z">
+                </path>
+              </svg>
+            </div>
+            <div class="col-12">
+              <a class="nav-link mb-4 icon-link" aria-current="page" href="#">La tua libreria</a>
+             </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       </div>
       <div id="hideFriends" class="col-2 bg-black collapse show">
         <div class="d-flex text-light mt-3 gap-3">

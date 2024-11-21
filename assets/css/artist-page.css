@@ -7,17 +7,47 @@
 #hearth-btn:hover {
   fill: white;
 }
-
-/* Footer  */
-
-/* @media screen and (max-width: 879px) {
-  .sound-bar-desktop {
-    display: none;
+/*Rimuove sezione sinistra*/
+@media screen and (max-width:990px){
+  #firstSection{
+      display: none;
   }
 }
 
-@media screen and (min-width: 880px) {
-  .sound-bar-mobile {
-    display: none;
+/*Rimuove footer*/
+@media screen and (max-width:990px){
+  footer {
+      display: none;
   }
-} */
+}
+/*Aggiunta footer versione mobile*/
+@media screen and (min-width:990px) {
+  .endPage {
+      display: none;
+  }
+}
+@media screen and (max-width:989px) {
+.endPage {
+  display: block;
+}
+}
+/*Rimuove sezione amici*/
+@media screen and (max-width:1200px){
+  #hideFriends{
+      display: none;
+  }
+}
+/*Rimuove dropdown Utente*/
+@media screen and (max-width:786px){
+  .userDropdown {
+      display: none;
+  }
+}
+@media screen and (min-width:787px){
+  .userDropdown {
+      display:flex;
+  }
+}
+.icon-link:hover {
+  color: white;
+}
