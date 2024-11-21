@@ -1,65 +1,78 @@
 /*Rimuove sezione sinistra*/
-@media screen and (max-width:990px){
-    #firstSection{
+@media screen and (max-width:990px) {
+    #firstSection {
         display: none;
     }
-  }
+}
 
 /*Rimuove footer*/
-@media screen and (max-width:990px){
+@media screen and (max-width:990px) {
     footer {
         display: none;
     }
-  }
-  /*Aggiunta footer versione mobile*/
-  @media screen and (min-width:990px) {
+}
+
+/*Aggiunta footer versione mobile*/
+@media screen and (min-width:990px) {
     .endPage {
         display: none;
     }
-  }
-  @media screen and (max-width:989px) {
-  .endPage {
-    display: block;
-  }
-  }
-  .icon-link:hover {
+}
+
+@media screen and (max-width:989px) {
+    .endPage {
+        display: block;
+    }
+}
+
+.icon-link:hover {
     color: white;
-  }
-  /*Rimuove sezione amici*/
-@media screen and (max-width:1200px){
-    #hideFriends{
+}
+
+/*Rimuove sezione amici*/
+@media screen and (max-width:1200px) {
+    #hideFriends {
         display: none;
     }
 }
+
 /*Cambio colore main*/
 .main {
-    background-color: #1f1f1f;;
+    background-color: #1f1f1f;
+    ;
 }
+
 @media screen and (max-width:989px) {
- .main {
-    background-color: black;
- }
+    .main {
+        background-color: black;
+    }
 }
+
 /*Cambio colore barra input*/
 .inputSearch {
     background-color: black !important;
     color: white !important;
 }
-@media screen and (max-width:989px){
+
+@media screen and (max-width:989px) {
     .inputSearch {
         background-color: #1f1f1f !important;
         color: white !important;
     }
 }
+
 .inputSearch::placeholder {
     color: white !important;
 }
+
 /*Cambio colore button*/
 .buttonColor {
     background-color: black;
-}@media screen and (max-width:989px){
+}
+
+@media screen and (max-width:989px) {
     .buttonColor {
         background-color: #1f1f1f;
-        
+
     }
 }
