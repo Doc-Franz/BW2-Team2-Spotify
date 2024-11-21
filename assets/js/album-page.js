@@ -1,0 +1,137 @@
+const urlParams = new URLSearchParams(window.location.search);
+const albumId = urlParams.get("appId");
+
+const URL = "https://striveschool-api.herokuapp.com/api/deezer/";
+const albumUrl = "album/";
+
+// Funzione che dato un numero inserisce il punto nella posizione delle migliaia
+const nbFans = (nFans) => {
+  let arr = nFans.toString().split("");
+  let i = arr.length - 3;
+  while (i > 0) {
+    arr.splice(i, 0, ".");
+    i -= 3;
+  }
+  return arr.join("");
+};
+
+const getContentAlbum = (album) => {
+  document.getElementById("albumTitle").innerText = album.title;
+  document.getElementById("mainImg").src = album.cover_big;
+  document.getElementById("imgSubtitle").src = album.artist.picture;
+  document.getElementById("albumSubtitle").innerText = `${album.artist.name} • ${album.release_date}  • ${album.nb_tracks} brani, ${Math.floor(
+    album.duration / 60
+  )} min ${album.duration % 60} sec`;
+
+  // Creazione contenuto pagina (canzoni)
+  for (let i = 0; i < album.tracks.data.length; i++) {
+    const tracks = album.tracks.data[i];
+    const albumContent = document.querySelector(".albumListContent");
+
+    const row = document.createElement("div");
+    row.className = "row mb-3";
+
+    const numSong = document.createElement("div");
+    numSong.className = "col-1";
+    numSong.innerText = i + 1;
+
+    const contentSong = document.createElement("div");
+    contentSong.className = "col-5 ps-0";
+    const titleSong = document.createElement("h5");
+    titleSong.className = "m-0";
+    titleSong.style.fontSize = "0.9rem";
+    titleSong.innerText = tracks.title;
+    const artistSong = document.createElement("a");
+    artistSong.className = "text-secondary text-decoration-none";
+    artistSong.href = `./artist-page.html?appId=${album.artist.id}`;
+    artistSong.style.fontSize = "0.8rem";
+    artistSong.innerText = album.artist.name;
+
+    const fansSongs = document.createElement("div");
+    fansSongs.className = "col-4 text-secondary";
+    fansSongs.style.fontSize = "0.7rem";
+    fansSongs.innerText = nbFans(tracks.rank);
+
+    const durationSong = document.createElement("div");
+    durationSong.className = "col-2 text-secondary";
+    durationSong.style.fontSize = "0.7rem";
+    durationSong.innerText = `${Math.floor(tracks.duration / 60)}:${tracks.duration % 60}`;
+
+    contentSong.append(titleSong, artistSong);
+    row.append(numSong, contentSong, fansSongs, durationSong);
+    albumContent.appendChild(row);
+  }
+};
+
+// Inserimento artista e chiamata alla funzione per cambiare il contenuto della pagina
+const getAlbum = () => {
+  if (albumId) {
+    fetch(`${URL + albumUrl}${albumId}`, {
+      headers: {
+        "x-rapidapi-key": tokenAPI,
+        "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com"
+      }
+    })
+      .then((resp) => resp.json())
+      .then((album) => {
+        // Inserimento canzoni
+        getContentAlbum(album);
+      })
+      .catch((err) => {
+        console.error("Errore nel recupero del prodotto:", err);
+      });
+  }
+};
+
+// Creazione Playlist
+const arrs = [
+  "119606",
+  "595243",
+  "7090505",
+  "103248",
+  "670261311",
+  "185484062",
+  "129682552",
+  "129682632",
+  "12047958",
+  "12047952",
+  "12047956",
+  "507149371",
+  "12047934",
+  "1603030"
+];
+
+const getPlaylist = (endpoint, arrsUrlID) => {
+  arrsUrlID.forEach((arrUrl) => {
+    fetch(URL + endpoint + arrUrl, {
+      headers: {
+        "x-rapidapi-key": tokenAPI,
+        "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com"
+      }
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error(`Error data ${response.statusText}`);
+        }
+      })
+      .then((musicObj) => {
+        const ul = document.querySelector(".random-playlist");
+        const li = document.createElement("li");
+        li.className = "nav-item";
+        const a = document.createElement("a");
+        a.className = "text-decoration-none text-secondary";
+        a.href = `./album-page.html?appId=${musicObj.id}`;
+        a.innerText = musicObj.title;
+        li.appendChild(a);
+        ul.appendChild(li);
+      });
+  });
+};
+
+// Caricamento della pagina
+window.addEventListener("DOMContentLoaded", () => {
+  getAlbum();
+  getPlaylist(albumUrl, arrs);
+});

@@ -1,37 +1,5 @@
-// FAI UNA PROVA COMMENTANDO DA RIGA 76 A RIGA 108 E TOGLI IL COMMENTO DA RIGA 10 A 34!!!!
-// GUARDA CHE FIGATA!! DOVREMMO COLLEGARE SOLAMENTE LA CONST PROVA =... ALL'INPUT NELLA BARRA DI RICERCA ED HAI ACCESSO A TUTTI I CONTENUTI!!!!!
-
 const URL = "https://striveschool-api.herokuapp.com/api/deezer/";
 const albumUrl = "album/";
-const artistUrl = "artist/";
-const searchUrl = "search/";
-let updateHero = true; //Con questa condizione verifico se chiamare changeHero() oppure createPlaylists()
-
-// const prova = "i pinguini tattici nucleari";
-
-// const getMusic = () => {
-//   fetch("https://deezerdevs-deezer.p.rapidapi.com/search?q=" + prova, {
-//     headers: {
-//       "x-rapidapi-key": tokenAPI,
-//       "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com",
-//       q: prova
-//     }
-//   })
-//     .then((response) => {
-//       if (response.ok) {
-//         return response.json();
-//       } else {
-//         throw new Error(`Error data not found ${resp.statusText}`);
-//       }
-//     })
-//     .then((musicObj) => {
-//       musicObj.data.forEach((element) => console.log(element.album.title));
-//     });
-// };
-
-// window.addEventListener("DOMContentLoaded", () => {
-//   getMusic();
-// });
 
 const changeHero = (albumObj) => {
   // HERO
@@ -50,13 +18,13 @@ const changeHero = (albumObj) => {
   // FOOTER
   const imgFooter = document.querySelector(".footerImg");
   imgFooter.src = albumObj.cover;
+  const footerImgLink = document.querySelector(".footerImgLink");
+  footerImgLink.href = `./album-page.html?appId=${albumObj.id}`;
   const footerTitle = document.querySelector(".footerTitle");
   footerTitle.innerText = albumObj.title;
   const footerArtist = document.querySelector(".footerArtist");
   footerArtist.innerText = albumObj.artist.name;
-
-  updateHero = false; //Aggiorno la condizione per fare in modo che il contenuto dell'hero non venga refreshato
-  createPlaylists(); //Una volta caricato il contenuto dell'hero invoco la funzione che gestirà il contenuto delle playlist
+  footerArtist.href = `./artist-page.html?appId=${albumObj.artist.id}`;
 
   // MusicBAR
   // E' corretto ma bisogna cambiare l'albumOBJ con l'oggetto della canzone presa singolarmente ("singolaCanzone".duration)
@@ -64,8 +32,7 @@ const changeHero = (albumObj) => {
   // durationMusicTotal.innerText = `${albumObj.duration / 60}:${albumObj.duration % 60}`;
 };
 
-const arr = [
-  "594581752",
+const arrs = [
   "119606",
   "595243",
   "7090505",
@@ -80,20 +47,45 @@ const arr = [
   "507149371",
   "12047934",
   "1603030"
-]; //Array con id delle canzoni
+];
 
 const randomMusicID = () => {
-  return arr[Math.floor(Math.random() * arr.length)];
+  return arrs[Math.floor(Math.random() * arrs.length)];
 };
 
-const createPlaylists = () => {
-  arr.forEach((element) => {
-    getMusic(albumUrl, element); //Ad ogni ciclo dell'array chiamo una fetch per aggiornare il contenuto della barra Playlist
+// CreatePlaylist
+const getPlaylist = (endpoint, arrsUrlID) => {
+  arrsUrlID.forEach((arrUrl) => {
+    fetch(URL + endpoint + arrUrl, {
+      headers: {
+        "x-rapidapi-key": tokenAPI,
+        "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com"
+      }
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error(`Error data ${response.statusText}`);
+        }
+      })
+      .then((musicObj) => {
+        const ul = document.querySelector(".random-playlist");
+        const li = document.createElement("li");
+        li.className = "nav-item";
+        const a = document.createElement("a");
+        a.className = "text-decoration-none text-secondary";
+        a.href = `./album-page.html?appId=${musicObj.id}`;
+        a.innerText = musicObj.title;
+        li.appendChild(a);
+        ul.appendChild(li);
+      });
   });
 };
 
-const getMusic = (endpoint, urlID) => {
-  fetch(URL + endpoint + urlID, {
+// ChangeHero
+const getHero = (endpoint) => {
+  fetch(URL + endpoint + randomMusicID(), {
     headers: {
       "x-rapidapi-key": tokenAPI,
       "x-rapidapi-host": "deezerdevs-deezer.p.rapidapi.com"
@@ -107,23 +99,12 @@ const getMusic = (endpoint, urlID) => {
       }
     })
     .then((musicObj) => {
-      console.log(musicObj);
-      if (updateHero) {
-        changeHero(musicObj);
-      } else {
-        const ul = document.querySelector(".random-playlist");
-        const li = document.createElement("li");
-        li.className = "nav-item";
-        const a = document.createElement("a");
-        a.className = "text-decoration-none text-secondary";
-        a.href = `./album-page.html?appId=${musicObj.id}`;
-        a.innerText = musicObj.title;
-        li.appendChild(a);
-        ul.appendChild(li);
-      }
+      changeHero(musicObj);
     });
 };
 
-window.addEventListener("DOMContentLoaded", function () {
-  getMusic(albumUrl, randomMusicID());
+// Caricamento della pagina
+window.addEventListener("DOMContentLoaded", () => {
+  getPlaylist(albumUrl, arrs);
+  getHero(albumUrl);
 });
