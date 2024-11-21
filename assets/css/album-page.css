@@ -9,3 +9,70 @@
         display: none;
     }
 }
+/*Rimuove sezione sinistra*/
+@media screen and (max-width:990px){
+    #firstSection{
+        display: none;
+    }
+}
+/*Rimuove sezione play*/
+@media screen and (max-width:768px){
+    #playSection {
+        display: none;
+    }
+}
+
+/*Aggiunta sezione play mobile*/
+@media screen and (min-width:768px){
+    #playSectionMobile {
+        display:none;
+    }
+}
+@media screen and (max-width:767px){
+    #playSectionMobile{
+        display: block;
+
+    }
+}
+
+/*Rimuove footer*/
+@media screen and (max-width:990px){
+    footer {
+        display: none;
+    }
+}
+/*Aggiunta footer versione mobile*/
+@media screen and (min-width:990px) {
+    .endPage {
+        display: none;
+    }
+}
+@media screen and (max-width:989px) {
+ .endPage {
+    display: block;
+ }
+}
+/*Rimuove sezione amici, sezione sinistra, nome dell'artista, dropdown Utente*/
+@media screen and (max-width:768px){
+    #hideFriends{
+        display: none;
+    }
+    #artistName {
+        display: none;
+    }
+    #userDropdown {
+        display:none;
+    }
+}
+/*Aggiunta nome artista versione mobile*/
+@media screen and (min-width:768px){
+    #artistNameMobile {
+        display: none;
+    }
+}
+@media screen and (max-width:767px){
+    #artistNameMobile{
+        display: block;
+
+    }
+}
