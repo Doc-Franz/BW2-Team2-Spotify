@@ -58,6 +58,7 @@
     .inputSearch {
         background-color: #1f1f1f !important;
         color: white !important;
+        font-weight: bold;
     }
 }
 
@@ -76,3 +77,23 @@
 
     }
 }
+
+/* Stile della card con transizione */
+.ciao {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+/* Effetto hover: ingrandisce la card e aggiunge un'ombra */
+  .ciao:hover {
+    transform: scale(1.05); /* Ingrandisce la card del 5% */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); /* Ombra più intensa */
+  }
+/*Effetto hover: lista playlist sezione sinistra*/
+  .liColor:hover {
+    background-color: rgb(50, 55, 63,0.4);
+  }
+/*Rimuove bordi quando input cerca è selezionato*/
+  #searchText:focus{
+    outline: none !important;
+    border: none !important;
+  }

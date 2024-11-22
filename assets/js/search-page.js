@@ -88,6 +88,7 @@ const getPlaylist = (endpoint, arrsUrlID) => {
         const ul = document.querySelector(".random-playlist");
         const li = document.createElement("li");
         li.className = "nav-item";
+        li.className = "liColor";
         const a = document.createElement("a");
         a.className = "text-decoration-none text-secondary";
         a.href = `./album-page.html?appId=${musicObj.id}`;

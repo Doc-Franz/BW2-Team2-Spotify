@@ -40,7 +40,7 @@ const getContentAlbum = (album) => {
     const albumContent = document.querySelector(".albumListContent");
 
     const row = document.createElement("div");
-    row.className = "row mb-3";
+    row.className = "row mb-3 ciao";
 
     const numSong = document.createElement("div");
     numSong.className = "col-1";
@@ -168,6 +168,7 @@ const getPlaylist = (endpoint, arrsUrlID) => {
         const ul = document.querySelector(".random-playlist");
         const li = document.createElement("li");
         li.className = "nav-item";
+        li.className = "liColor";
         const a = document.createElement("a");
         a.className = "text-decoration-none text-secondary";
         a.href = `./album-page.html?appId=${musicObj.id}`;
