@@ -115,6 +115,13 @@ const setFooterMusicBar = () => {
   const footerArtist = document.querySelector(".footerArtist");
   footerArtist.innerText = footerMusicArtist;
   footerArtist.href = footerMusicArtistLink;
+  // mobile
+  const mobileBarTitle = document.getElementById("musicBarMobileTitle");
+  mobileBarTitle.innerText = sessionStorage.getItem("storageMobileBarTitle");
+  mobileBarTitle.href = sessionStorage.getItem("storageMobileBarTitleLink");
+  const mobileBarArtist = document.getElementById("musicBarMobileArtist");
+  mobileBarArtist.innerText = sessionStorage.getItem("storageMobileBarArtist");
+  mobileBarArtist.href = sessionStorage.getItem("storageMobileBarArtistLink");
 };
 
 // Caricamento della pagina

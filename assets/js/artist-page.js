@@ -63,11 +63,23 @@ const changeContent = (song) => {
         footerArtist.innerText = songArtist.innerText;
         footerArtist.href = `./artist-page.html?appId=${artistId}`;
 
+        // mobile
+        const mobileBarTitle = document.getElementById("musicBarMobileTitle");
+        mobileBarTitle.innerText = `${footerTitle.innerText} -`;
+        mobileBarTitle.href = footerImgLink.href;
+        const mobileBarArtist = document.getElementById("musicBarMobileArtist");
+        mobileBarArtist.innerText = footerArtist.innerText;
+        mobileBarArtist.href = footerArtist.href;
+
         sessionStorage.setItem("storageMusicImg", imgFooter.src);
         sessionStorage.setItem("storageMusicImgLink", footerImgLink.href);
         sessionStorage.setItem("storageMusicTitle", footerTitle.innerText);
         sessionStorage.setItem("storageMusicArtist", footerArtist.innerText);
         sessionStorage.setItem("storageMusicArtistLink", footerArtist.href);
+        sessionStorage.setItem("storageMobileBarTitle", mobileBarTitle.innerText);
+        sessionStorage.setItem("storageMobileBarTitleLink", mobileBarTitle.href);
+        sessionStorage.setItem("storageMobileBarArtist", mobileBarArtist.innerText);
+        sessionStorage.setItem("storageMobileBarArtistLink", mobileBarArtist.href);
       })
   );
 };
@@ -182,6 +194,13 @@ const setFooterMusicBar = () => {
   const footerArtist = document.querySelector(".footerArtist");
   footerArtist.innerText = footerMusicArtist;
   footerArtist.href = footerMusicArtistLink;
+  // mobile
+  const mobileBarTitle = document.getElementById("musicBarMobileTitle");
+  mobileBarTitle.innerText = sessionStorage.getItem("storageMobileBarTitle");
+  mobileBarTitle.href = sessionStorage.getItem("storageMobileBarTitleLink");
+  const mobileBarArtist = document.getElementById("musicBarMobileArtist");
+  mobileBarArtist.innerText = sessionStorage.getItem("storageMobileBarArtist");
+  mobileBarArtist.href = sessionStorage.getItem("storageMobileBarArtistLink");
 };
 // Caricamento della pagina
 window.addEventListener("DOMContentLoaded", () => {

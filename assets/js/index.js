@@ -27,6 +27,13 @@ const changeHero = (albumObj) => {
     const footerArtist = document.querySelector(".footerArtist");
     footerArtist.innerText = sessionStorage.getItem("storageMusicArtist");
     footerArtist.href = sessionStorage.getItem("storageMusicArtistLink");
+    // mobile
+    const mobileBarTitle = document.getElementById("musicBarMobileTitle");
+    mobileBarTitle.innerText = sessionStorage.getItem("storageMobileBarTitle");
+    mobileBarTitle.href = sessionStorage.getItem("storageMobileBarTitleLink");
+    const mobileBarArtist = document.getElementById("musicBarMobileArtist");
+    mobileBarArtist.innerText = sessionStorage.getItem("storageMobileBarArtist");
+    mobileBarArtist.href = sessionStorage.getItem("storageMobileBarArtistLink");
   } else {
     const imgFooter = document.querySelector(".footerImg");
     imgFooter.src = albumObj.cover;
@@ -37,6 +44,13 @@ const changeHero = (albumObj) => {
     const footerArtist = document.querySelector(".footerArtist");
     footerArtist.innerText = albumObj.artist.name;
     footerArtist.href = `./artist-page.html?appId=${albumObj.artist.id}`;
+    // mobile
+    const mobileBarTitle = document.getElementById("musicBarMobileTitle");
+    mobileBarTitle.innerText = `${albumObj.title} -`;
+    mobileBarTitle.href = `./album-page.html?appId=${albumObj.id}`;
+    const mobileBarArtist = document.getElementById("musicBarMobileArtist");
+    mobileBarArtist.innerText = albumObj.artist.name;
+    mobileBarArtist.href = `./artist-page.html?appId=${albumObj.artist.id}`;
 
     // SetMusicBar
     sessionStorage.setItem("storageMusicImg", imgFooter.src);
@@ -44,6 +58,10 @@ const changeHero = (albumObj) => {
     sessionStorage.setItem("storageMusicTitle", footerTitle.innerText);
     sessionStorage.setItem("storageMusicArtist", footerArtist.innerText);
     sessionStorage.setItem("storageMusicArtistLink", footerArtist.href);
+    sessionStorage.setItem("storageMobileBarTitle", mobileBarTitle.innerText);
+    sessionStorage.setItem("storageMobileBarTitleLink", mobileBarTitle.href);
+    sessionStorage.setItem("storageMobileBarArtist", mobileBarArtist.innerText);
+    sessionStorage.setItem("storageMobileBarArtistLink", mobileBarArtist.href);
     sessionStorage.setItem("checkStorageStatus", checkStorageStatus);
   }
 
