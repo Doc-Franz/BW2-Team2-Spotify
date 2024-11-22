@@ -16,7 +16,6 @@ const changeHero = (albumObj) => {
   heroTxt.innerText = `Ascolta il nuovo singolo di ${albumObj.artist.name}`;
   // FOOTER
   let checkStorageStatus = sessionStorage.getItem("checkStorageStatus") ? "true" : "false";
-  console.log(checkStorageStatus);
   if (checkStorageStatus === "true") {
     const imgFooter = document.querySelector(".footerImg");
     imgFooter.src = sessionStorage.getItem("storageMusicImg");

@@ -24,14 +24,28 @@ const nbFans = (nFans) => {
 
 const getContentAlbum = (album) => {
   const preview = {};
+  const imgHero = document.getElementById("mainImg");
+  imgHero.setAttribute("crossorigin", "anonymous");
 
-  console.log(album);
   document.getElementById("albumTitle").innerText = album.title;
   document.getElementById("mainImg").src = album.cover_big;
   document.getElementById("imgSubtitle").src = album.artist.picture;
   document.getElementById("albumSubtitle").innerText = `${album.artist.name} • ${album.release_date}  • ${album.nb_tracks} brani, ${Math.floor(
     album.duration / 60
   )} min ${album.duration % 60} sec`;
+
+  const heroContainer = document.querySelector(".hero");
+  const colorThief = new ColorThief();
+
+  if (imgHero.complete) {
+    const colors = colorThief.getColor(imgHero);
+    heroContainer.style.backgroundColor = `rgb(${colors})`;
+  } else {
+    imgHero.addEventListener("load", function () {
+      const colors = colorThief.getColor(imgHero);
+      heroContainer.style.backgroundColor = `rgb(${colors})`;
+    });
+  }
 
   // Creazione contenuto pagina (canzoni)
   for (let i = 0; i < album.tracks.data.length; i++) {
@@ -111,14 +125,35 @@ const getContentAlbum = (album) => {
         sessionStorage.setItem("storageMobileBarArtist", mobileBarArtist.innerText);
         sessionStorage.setItem("storageMobileBarArtistLink", mobileBarArtist.href);
 
-        // let audio = new Audio(preview[titleSong[index].innerText]);
-        // if (checkStatusMusic === true) {
-        //   checkStatusMusic = false;
-        //   audio.play();
-        // } else {
-        //   checkStatusMusic = true;
-        //   audio.pause();
-        // }
+        let audio = new Audio(preview[titleSong[index].innerText]);
+        audio.play();
+
+        const playBtn = document.querySelector(".playBtn");
+        playBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-pause-circle" viewBox="0 0 16 16">
+  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+  <path d="M5 6.25a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0zm3.5 0a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0z"/>
+</svg>`;
+        playBtn.onclick = () => {
+          audio.pause();
+          playBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                        class="bi bi-play-circle-fill" viewBox="0 0 16 16">
+                        <path
+                          d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814z" />
+                      </svg>`;
+        };
+        const playBtn2 = document.querySelector(".playBtn2");
+        playBtn2.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-pause-circle" viewBox="0 0 16 16">
+  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+  <path d="M5 6.25a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0zm3.5 0a1.25 1.25 0 1 1 2.5 0v3.5a1.25 1.25 0 1 1-2.5 0z"/>
+</svg>`;
+        playBtn2.onclick = () => {
+          audio.pause();
+          playBtn2.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                        class="bi bi-play-circle-fill" viewBox="0 0 16 16">
+                        <path
+                          d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814z" />
+                      </svg>`;
+        };
       })
   );
 };

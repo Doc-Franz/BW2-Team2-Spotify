@@ -33,7 +33,6 @@ const changeContent = (song) => {
   const artistImgBG = document.querySelector(".image-bg").style.backgroundImage;
   const artistImg = artistImgBG.slice(artistImgBG.indexOf('("') + 2, artistImgBG.lastIndexOf('")')); //Immagine di BG senza l'url, ma con il contenuto HTTPS
 
-  console.log();
   for (let i = 0; i < 10; i++) {
     const artistMusic = song.data[i];
     songImgLink[i].href = `./album-page.html?appId=${artistMusic.album.id}`;
@@ -46,7 +45,6 @@ const changeContent = (song) => {
   const likesImg = document.getElementById("likesImg");
   likesArtist.innerText = `Di ${songArtist.innerText}!`;
   likesImg.src = artistImg;
-  console.log(song);
   const musics = document.querySelectorAll("#music");
   musics.forEach(
     (music, index) =>
