@@ -29,7 +29,7 @@ const getContentAlbum = (album) => {
     const albumContent = document.querySelector(".albumListContent");
 
     const row = document.createElement("div");
-    row.className = "row mb-3";
+    row.className = "row mb-3 ciao";
 
     const numSong = document.createElement("div");
     numSong.className = "col-1";

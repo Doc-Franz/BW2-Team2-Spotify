@@ -58,6 +58,7 @@
     .inputSearch {
         background-color: #1f1f1f !important;
         color: white !important;
+        font-weight: bold;
     }
 }
 
@@ -89,5 +90,10 @@
   }
 /*Effetto hover: lista playlist sezione sinistra*/
   .liColor:hover {
-    background-color: rgb(50, 55, 63);
+    background-color: rgb(50, 55, 63,0.4);
+  }
+/*Rimuove bordi quando input cerca è selezionato*/
+  #searchText:focus{
+    outline: none !important;
+    border: none !important;
   }

@@ -97,5 +97,5 @@
   
   /*Effetto hover: lista playlist sezione sinistra*/
   .liColor:hover {
-    background-color: rgb(50, 55, 63);
+    background-color: rgb(50, 55, 63,0.4);
   }
