@@ -88,4 +88,14 @@
     transform: scale(1.05); /* Ingrandisce la card del 5% */
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); /* Ombra più intensa */
   }
+  .colorCard{
+    background-color: rgb(33, 36, 41);
+  }
+  .colorCard:hover{
+    background-color: rgb(50, 55, 63);
+  }
   
+  /*Effetto hover: lista playlist sezione sinistra*/
+  .liColor:hover {
+    background-color: rgb(50, 55, 63);
+  }
