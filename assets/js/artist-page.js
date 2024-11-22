@@ -6,6 +6,12 @@ const albumUrl = "album/";
 const artistUrl = "artist/";
 const searchUrl = "/search?q=";
 
+let footerMusicImg = "";
+let footerMusicImgLink = "";
+let footerMusicTitle = "";
+let footerMusicArtist = "";
+let footerMusicArtistLink = "";
+
 // Funzione che dato un numero inserisce il punto nella posizione delle migliaia
 const nbFans = (nFans) => {
   let arr = nFans.toString().split("");
@@ -23,6 +29,11 @@ const changeContent = (song) => {
   const songTitle = document.querySelectorAll(".songTitle");
   const songFans = document.querySelectorAll(".songFans");
   const songDuration = document.querySelectorAll(".songDuration");
+  const songArtist = document.getElementById("artistTitle");
+  const artistImgBG = document.querySelector(".image-bg").style.backgroundImage;
+  const artistImg = artistImgBG.slice(artistImgBG.indexOf('("') + 2, artistImgBG.lastIndexOf('")')); //Immagine di BG senza l'url, ma con il contenuto HTTPS
+
+  console.log();
   for (let i = 0; i < 10; i++) {
     const artistMusic = song.data[i];
     songImgLink[i].href = `./album-page.html?appId=${artistMusic.album.id}`;
@@ -31,11 +42,34 @@ const changeContent = (song) => {
     songFans[i].innerText = nbFans(artistMusic.rank);
     songDuration[i].innerText = `${Math.floor(artistMusic.duration / 60)}:${artistMusic.duration % 60}`;
   }
-  console.log(song);
   const likesArtist = document.getElementById("likesArtist");
   const likesImg = document.getElementById("likesImg");
-  likesArtist.innerText = `Di ${song.data[0].artist.name}!`;
-  likesImg.src = song.data[0].artist.picture;
+  likesArtist.innerText = `Di ${songArtist.innerText}!`;
+  likesImg.src = artistImg;
+  console.log(song);
+  const musics = document.querySelectorAll("#music");
+  musics.forEach(
+    (music, index) =>
+      (music.onclick = () => {
+        // console.log(preview[titleSong[index].innerText]);
+
+        const imgFooter = document.querySelector(".footerImg");
+        imgFooter.src = songImg[index].src;
+        const footerImgLink = document.querySelector(".footerImgLink");
+        footerImgLink.href = songImgLink[index].href;
+        const footerTitle = document.querySelector(".footerTitle");
+        footerTitle.innerText = songTitle[index].innerText;
+        const footerArtist = document.querySelector(".footerArtist");
+        footerArtist.innerText = songArtist.innerText;
+        footerArtist.href = `./artist-page.html?appId=${artistId}`;
+
+        sessionStorage.setItem("storageMusicImg", imgFooter.src);
+        sessionStorage.setItem("storageMusicImgLink", footerImgLink.href);
+        sessionStorage.setItem("storageMusicTitle", footerTitle.innerText);
+        sessionStorage.setItem("storageMusicArtist", footerArtist.innerText);
+        sessionStorage.setItem("storageMusicArtistLink", footerArtist.href);
+      })
+  );
 };
 
 // Cambiamento contenuto della pagina
@@ -131,8 +165,26 @@ const getPlaylist = (endpoint, arrsUrlID) => {
   });
 };
 
+const setFooterMusicBar = () => {
+  footerMusicImg = sessionStorage.getItem("storageMusicImg");
+  footerMusicImgLink = sessionStorage.getItem("storageMusicImgLink");
+  footerMusicTitle = sessionStorage.getItem("storageMusicTitle");
+  footerMusicArtist = sessionStorage.getItem("storageMusicArtist");
+  footerMusicArtistLink = sessionStorage.getItem("storageMusicArtistLink");
+
+  const imgFooter = document.querySelector(".footerImg");
+  imgFooter.src = footerMusicImg;
+  const footerImgLink = document.querySelector(".footerImgLink");
+  footerImgLink.href = footerMusicImgLink;
+  const footerTitle = document.querySelector(".footerTitle");
+  footerTitle.innerText = footerMusicTitle;
+  const footerArtist = document.querySelector(".footerArtist");
+  footerArtist.innerText = footerMusicArtist;
+  footerArtist.href = footerMusicArtistLink;
+};
 // Caricamento della pagina
 window.addEventListener("DOMContentLoaded", () => {
+  setFooterMusicBar();
   getArtist();
   getPlaylist(albumUrl, arrs);
 });

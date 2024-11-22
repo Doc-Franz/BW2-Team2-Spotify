@@ -14,17 +14,38 @@ const changeHero = (albumObj) => {
   heroArtist.href = `./artist-page.html?appId=${albumObj.artist.id}`;
   const heroTxt = document.querySelector(".heroTxt");
   heroTxt.innerText = `Ascolta il nuovo singolo di ${albumObj.artist.name}`;
-
   // FOOTER
-  const imgFooter = document.querySelector(".footerImg");
-  imgFooter.src = albumObj.cover;
-  const footerImgLink = document.querySelector(".footerImgLink");
-  footerImgLink.href = `./album-page.html?appId=${albumObj.id}`;
-  const footerTitle = document.querySelector(".footerTitle");
-  footerTitle.innerText = albumObj.title;
-  const footerArtist = document.querySelector(".footerArtist");
-  footerArtist.innerText = albumObj.artist.name;
-  footerArtist.href = `./artist-page.html?appId=${albumObj.artist.id}`;
+  let checkStorageStatus = sessionStorage.getItem("checkStorageStatus") ? "true" : "false";
+  console.log(checkStorageStatus);
+  if (checkStorageStatus === "true") {
+    const imgFooter = document.querySelector(".footerImg");
+    imgFooter.src = sessionStorage.getItem("storageMusicImg");
+    const footerImgLink = document.querySelector(".footerImgLink");
+    footerImgLink.href = sessionStorage.getItem("storageMusicImgLink");
+    const footerTitle = document.querySelector(".footerTitle");
+    footerTitle.innerText = sessionStorage.getItem("storageMusicTitle");
+    const footerArtist = document.querySelector(".footerArtist");
+    footerArtist.innerText = sessionStorage.getItem("storageMusicArtist");
+    footerArtist.href = sessionStorage.getItem("storageMusicArtistLink");
+  } else {
+    const imgFooter = document.querySelector(".footerImg");
+    imgFooter.src = albumObj.cover;
+    const footerImgLink = document.querySelector(".footerImgLink");
+    footerImgLink.href = `./album-page.html?appId=${albumObj.id}`;
+    const footerTitle = document.querySelector(".footerTitle");
+    footerTitle.innerText = albumObj.title;
+    const footerArtist = document.querySelector(".footerArtist");
+    footerArtist.innerText = albumObj.artist.name;
+    footerArtist.href = `./artist-page.html?appId=${albumObj.artist.id}`;
+
+    // SetMusicBar
+    sessionStorage.setItem("storageMusicImg", imgFooter.src);
+    sessionStorage.setItem("storageMusicImgLink", footerImgLink.href);
+    sessionStorage.setItem("storageMusicTitle", footerTitle.innerText);
+    sessionStorage.setItem("storageMusicArtist", footerArtist.innerText);
+    sessionStorage.setItem("storageMusicArtistLink", footerArtist.href);
+    sessionStorage.setItem("checkStorageStatus", checkStorageStatus);
+  }
 
   // MusicBAR
   // E' corretto ma bisogna cambiare l'albumOBJ con l'oggetto della canzone presa singolarmente ("singolaCanzone".duration)

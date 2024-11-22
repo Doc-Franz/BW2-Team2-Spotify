@@ -4,6 +4,13 @@ const albumId = urlParams.get("appId");
 const URL = "https://striveschool-api.herokuapp.com/api/deezer/";
 const albumUrl = "album/";
 
+let footerMusicImg = "";
+let footerMusicImgLink = "";
+let footerMusicTitle = "";
+let footerMusicArtist = "";
+let footerMusicArtistLink = "";
+let checkStatusMusic = true;
+
 // Funzione che dato un numero inserisce il punto nella posizione delle migliaia
 const nbFans = (nFans) => {
   let arr = nFans.toString().split("");
@@ -16,6 +23,9 @@ const nbFans = (nFans) => {
 };
 
 const getContentAlbum = (album) => {
+  const preview = {};
+
+  console.log(album);
   document.getElementById("albumTitle").innerText = album.title;
   document.getElementById("mainImg").src = album.cover_big;
   document.getElementById("imgSubtitle").src = album.artist.picture;
@@ -26,6 +36,7 @@ const getContentAlbum = (album) => {
   // Creazione contenuto pagina (canzoni)
   for (let i = 0; i < album.tracks.data.length; i++) {
     const tracks = album.tracks.data[i];
+    preview[tracks.title] = tracks.preview;
     const albumContent = document.querySelector(".albumListContent");
 
     const row = document.createElement("div");
@@ -37,15 +48,18 @@ const getContentAlbum = (album) => {
 
     const contentSong = document.createElement("div");
     contentSong.className = "col-5 ps-0";
+    contentSong.id = "song";
     const titleSong = document.createElement("h5");
     titleSong.className = "m-0";
     titleSong.style.fontSize = "0.9rem";
     titleSong.innerText = tracks.title;
+    titleSong.id = "titleSong";
     const artistSong = document.createElement("a");
     artistSong.className = "text-secondary text-decoration-none";
     artistSong.href = `./artist-page.html?appId=${album.artist.id}`;
     artistSong.style.fontSize = "0.8rem";
     artistSong.innerText = album.artist.name;
+    artistSong.id = "artistSong";
 
     const fansSongs = document.createElement("div");
     fansSongs.className = "col-4 text-secondary";
@@ -61,6 +75,40 @@ const getContentAlbum = (album) => {
     row.append(numSong, contentSong, fansSongs, durationSong);
     albumContent.appendChild(row);
   }
+  const songs = document.querySelectorAll("#song");
+  songs.forEach(
+    (song, index) =>
+      (song.onclick = () => {
+        const titleSong = document.querySelectorAll("#titleSong");
+        const artistSong = document.querySelectorAll("#artistSong");
+        const albumImg = document.getElementById("mainImg");
+
+        const imgFooter = document.querySelector(".footerImg");
+        imgFooter.src = albumImg.src;
+        const footerImgLink = document.querySelector(".footerImgLink");
+        footerImgLink.href = `./album-page.html?appId=${album.id}`;
+        const footerTitle = document.querySelector(".footerTitle");
+        footerTitle.innerText = titleSong[index].innerText;
+        const footerArtist = document.querySelector(".footerArtist");
+        footerArtist.innerText = artistSong[index].innerText;
+        footerArtist.href = artistSong[index].href;
+
+        sessionStorage.setItem("storageMusicImg", imgFooter.src);
+        sessionStorage.setItem("storageMusicImgLink", footerImgLink.href);
+        sessionStorage.setItem("storageMusicTitle", footerTitle.innerText);
+        sessionStorage.setItem("storageMusicArtist", footerArtist.innerText);
+        sessionStorage.setItem("storageMusicArtistLink", footerArtist.href);
+
+        // let audio = new Audio(preview[titleSong[index].innerText]);
+        // if (checkStatusMusic === true) {
+        //   checkStatusMusic = false;
+        //   audio.play();
+        // } else {
+        //   checkStatusMusic = true;
+        //   audio.pause();
+        // }
+      })
+  );
 };
 
 // Inserimento artista e chiamata alla funzione per cambiare il contenuto della pagina
@@ -130,8 +178,27 @@ const getPlaylist = (endpoint, arrsUrlID) => {
   });
 };
 
+const setFooterMusicBar = () => {
+  footerMusicImg = sessionStorage.getItem("storageMusicImg");
+  footerMusicImgLink = sessionStorage.getItem("storageMusicImgLink");
+  footerMusicTitle = sessionStorage.getItem("storageMusicTitle");
+  footerMusicArtist = sessionStorage.getItem("storageMusicArtist");
+  footerMusicArtistLink = sessionStorage.getItem("storageMusicArtistLink");
+
+  const imgFooter = document.querySelector(".footerImg");
+  imgFooter.src = footerMusicImg;
+  const footerImgLink = document.querySelector(".footerImgLink");
+  footerImgLink.href = footerMusicImgLink;
+  const footerTitle = document.querySelector(".footerTitle");
+  footerTitle.innerText = footerMusicTitle;
+  const footerArtist = document.querySelector(".footerArtist");
+  footerArtist.innerText = footerMusicArtist;
+  footerArtist.href = footerMusicArtistLink;
+};
+
 // Caricamento della pagina
 window.addEventListener("DOMContentLoaded", () => {
+  setFooterMusicBar();
   getAlbum();
   getPlaylist(albumUrl, arrs);
 });

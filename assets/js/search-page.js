@@ -2,6 +2,12 @@ const URL = "https://striveschool-api.herokuapp.com/api/deezer/";
 const albumUrl = "album/";
 const searchUrl = "/search?q=";
 
+let footerMusicImg = "";
+let footerMusicImgLink = "";
+let footerMusicTitle = "";
+let footerMusicArtist = "";
+let footerMusicArtistLink = "";
+
 const getSearchName = (searchParam) => {
   if (searchParam) {
     fetch(URL + searchUrl + searchParam, {
@@ -92,7 +98,26 @@ const getPlaylist = (endpoint, arrsUrlID) => {
   });
 };
 
+const setFooterMusicBar = () => {
+  footerMusicImg = sessionStorage.getItem("storageMusicImg");
+  footerMusicImgLink = sessionStorage.getItem("storageMusicImgLink");
+  footerMusicTitle = sessionStorage.getItem("storageMusicTitle");
+  footerMusicArtist = sessionStorage.getItem("storageMusicArtist");
+  footerMusicArtistLink = sessionStorage.getItem("storageMusicArtistLink");
+
+  const imgFooter = document.querySelector(".footerImg");
+  imgFooter.src = footerMusicImg;
+  const footerImgLink = document.querySelector(".footerImgLink");
+  footerImgLink.href = footerMusicImgLink;
+  const footerTitle = document.querySelector(".footerTitle");
+  footerTitle.innerText = footerMusicTitle;
+  const footerArtist = document.querySelector(".footerArtist");
+  footerArtist.innerText = footerMusicArtist;
+  footerArtist.href = footerMusicArtistLink;
+};
+
 // Caricamento della pagina
 window.addEventListener("DOMContentLoaded", () => {
+  setFooterMusicBar();
   getPlaylist(albumUrl, arrs);
 });
